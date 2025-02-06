@@ -1,8 +1,9 @@
 <template>
-  <div>Login</div>
+  <login-form></login-form>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import LoginForm from './LoginForm.vue'
 </script>
 
 <style>
