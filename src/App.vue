@@ -1,11 +1,13 @@
 <script setup>
-import waterMark from './components/waterMark.vue'
+// import waterMark from './components/waterMark.vue'
+import Login from './views/system/login/Login.vue'
 </script>
 
 <template>
-  <waterMark :markInfo="['cAdmin', 'copyright']" :options="{lineBreak: true,antiTamper: true}">
+  <!-- <waterMark :markInfo="['cAdmin', 'copyright']" :options="{lineBreak: true,antiTamper: true}">
     <RouterView />
-  </waterMark>
+  </waterMark> -->
+  <Login />
 </template>
 
 <style>
