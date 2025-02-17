@@ -1,6 +1,9 @@
+<!-- 水印组件 -->
 <template>
   <div class="watermark-container" ref="waterMmark">
-    <div class="watermark" ref="mark"  :style="{ backgroundImage: `${bgUrl}`}"></div>
+    <div class="watermark" ref="mark"  :style="{ backgroundImage: `${bgUrl}`}">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -68,7 +71,6 @@ const drawWaterMark = async() => {
         // y方向上的偏移也可以用字体大小来
         ctx.fillText(item, 0, options.offsetY + options.fontSize * index, options.maxWidth);
       } else {
-        console.log("example234:",options.offsetX + options.gapX * index)
         ctx.fillText(item, options.offsetX + options.gapX * index, 0, options.maxWidth);
       }
     })
@@ -110,7 +112,7 @@ const isImageByDom = (url) => {
  * 当观察到DOM元素的属性发生变化时，调用drawWaterMark函数重新绘制水印
  */
 let observer = new MutationObserver(mutationsList => {
-  console.log("example:", mutationsList)
+  // console.log("example:", mutationsList)
   mutationsList.forEach(mutation => { 
     if (mutation.removedNodes[0] = mark.value) {
       createMarkDeb()
@@ -131,6 +133,7 @@ onMounted(() => {
       subtree: true,
     })    
   }
+
   createMarkDeb()
 })
 
@@ -138,8 +141,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .watermark-container {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
+  width: 100%;
 
   & .watermark {
     position: absolute;
