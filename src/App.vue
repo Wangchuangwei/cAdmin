@@ -1,13 +1,21 @@
 <script setup>
-// import waterMark from './components/waterMark.vue'
-import Login from './views/system/login/Login.vue'
+import waterMark from './components/WaterMark/waterMark.vue'
+import Identify from './components/Verification/SliderIdentify.vue';
+
+import { getCurrentInstance } from 'vue';
+import { provide } from 'vue'
+const instance = getCurrentInstance();
+
+const $tMsgbox = instance.appContext.app.config.globalProperties.$tMsgbox;
+provide('$tMsgbox', $tMsgbox)
+
 </script>
 
 <template>
-  <!-- <waterMark :markInfo="['cAdmin', 'copyright']" :options="{lineBreak: true,antiTamper: true}">
-    <RouterView />
-  </waterMark> -->
-  <Login />
+  <Identify></Identify>
+  <waterMark :markInfo="['cAdmin', 'copyright']" :options="{lineBreak: true,antiTamper: true}">
+  </waterMark>
+  <RouterView />
 </template>
 
 <style>
