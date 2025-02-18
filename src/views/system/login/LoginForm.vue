@@ -37,9 +37,10 @@
                   </template>
                 </el-input>
                 <div class="login-smsCodePass">
-                  <Identify @click="renew"  v-if="renewCode" style="width: 84px;height: 32px;" ref="verificationCode"></Identify>
+                  <CodeIdentify @click="renew"  v-if="renewCode" style="width: 84px;height: 32px;" ref="verificationCode"></CodeIdentify>
                 </div>
               </el-form-item>
+              <SliderIdentify></SliderIdentify>
             </div>
             <div class="form-item-submit">
               <el-form-item style="margin-bottom: 0">
@@ -61,7 +62,8 @@ import { useUserStore } from '@/store/modules/user'
 import { User, Lock, CircleCheck } from '@element-plus/icons-vue'
 import { inject } from 'vue';
 
-import Identify from '@/components/Verification/CodeIdentify.vue';
+import CodeIdentify from '@/components/Verification/CodeIdentify.vue';
+import SliderIdentify from '@/components/Verification/SliderIdentify.vue';
 
 const tt = inject('$tMsgbox')
 
