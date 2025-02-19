@@ -1,6 +1,5 @@
 <script setup>
 import waterMark from './components/WaterMark/waterMark.vue'
-import Identify from './components/Verification/SliderIdentify.vue';
 
 import { getCurrentInstance } from 'vue';
 import { provide } from 'vue'
@@ -12,7 +11,6 @@ provide('$tMsgbox', $tMsgbox)
 </script>
 
 <template>
-  <Identify></Identify>
   <waterMark :markInfo="['cAdmin', 'copyright']" :options="{lineBreak: true,antiTamper: true}">
   </waterMark>
   <RouterView />

@@ -86,7 +86,7 @@
       }
 
       .login-form-wrapper {
-        // min-height: 100px;
+        margin-bottom: 18px;
       }
 
       .form-item-checkbox {
@@ -167,8 +167,8 @@
 
   .login-smsCodePass {
     width: 86px;
-    position: relative;
-    top: -35px;
+    position: absolute;
+    top: 0px;
     left: 200px;
     background: rgba(247, 247, 247, 1);
     border-radius: 1px;
