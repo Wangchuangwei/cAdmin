@@ -12,3 +12,9 @@ export function login(userInfo) {
     }
   })
 }
+
+export function getMenuList(logins) {
+  return new Promise((resolve, reject) => {
+    resolve(fetch.post('/tbsp/user/getMenuList', logins))
+  })
+}

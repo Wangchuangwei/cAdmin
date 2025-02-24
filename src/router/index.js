@@ -25,10 +25,10 @@ const routes = [
     component: () => import('@/views/system/login/Login.vue'),
   },
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/views/system/home/index.js'),
-    children:pageRoute
+    path: '/mainIndex',
+    name: 'MainIndex',
+    component: () => import('@/views/system/home/index.vue'),
+    // children:pageRoute
   },
 ]
 

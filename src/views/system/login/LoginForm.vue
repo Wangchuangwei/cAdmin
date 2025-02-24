@@ -61,6 +61,7 @@ import { nextTick, reactive, ref } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 import { User, Lock, CircleCheck } from '@element-plus/icons-vue'
 import { inject } from 'vue';
+import { router } from '@/router';
 
 import CodeIdentify from '@/components/Verification/CodeIdentify.vue';
 import SliderIdentify from '@/components/Verification/SliderIdentify.vue';
@@ -105,8 +106,10 @@ const handleLogin = async () => {
       username: 'admin',
       password: '123456',
       type: 'passwd',
-    })  
-      
+    })    
+    router.push({
+      name: 'MainIndex'
+    })
   } catch (error) {
     
   } finally {
