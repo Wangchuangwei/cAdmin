@@ -23,7 +23,7 @@ function insertStr(source,start,newStr){
 function createPageGuard(router) {
   router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore()
-    debugger
+    // debugger
     if (window.LOCAL_CONFIG.isToken) {
       if (userStore.token) {
         if (to.fullPath === '/login' || to.fullPath === '/' ) {

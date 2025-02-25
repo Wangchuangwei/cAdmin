@@ -1,12 +1,13 @@
 <template>
   <div class="container">
     <el-container style="height: 100%;">
-      <el-aside style="width: 20%;">
-        <left-menu></left-menu>
-      </el-aside>
+      <el-header>
+        <left-header></left-header>
+      </el-header>
       <el-container>
-        <el-header>
-        </el-header>
+        <el-aside style="width: 20%;">
+          <left-menu></left-menu>
+        </el-aside>
         <el-main>
           <div>ssss</div>
         </el-main>
@@ -19,6 +20,7 @@
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 
 import LeftMenu from "./components/Menu.vue";
+import LeftHeader from "./components/Header.vue";
 
 onMounted(() => {
   console.log("home layout")

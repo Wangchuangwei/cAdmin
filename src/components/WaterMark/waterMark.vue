@@ -30,7 +30,7 @@ const defaultOptions = {
   fontFamily: 'Arial',
   textAlign: 'center',
   textBaseline: 'middle',
-  opacity: 0.8,
+  opacity: 0.3,
   rotate: (-45 * Math.PI) / 180,  
 
   gapX: 100,
