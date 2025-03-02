@@ -9,7 +9,10 @@
           <left-menu></left-menu>
         </el-aside>
         <el-main>
-          <div>ssss</div>
+          <div>
+            <!-- <pdfViewVue></pdfViewVue> -->
+            <analysisVue></analysisVue>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -22,7 +25,10 @@ import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import LeftMenu from "./components/Menu.vue";
 import LeftHeader from "./components/Header.vue";
 
-onMounted(() => {
+import pdfViewVue from "@/components/pdfViewer/pdfViewer.vue";
+import analysisVue from "../../pages/dashboard/analysis.vue";
+
+(() => {
   console.log("home layout")
 })
 </script>
