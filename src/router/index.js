@@ -12,9 +12,15 @@ export const pageRoute = [
         type: 'menu',
         path: 'pdfView',
         component: () => import('@/views/pages/preview/pdfView.vue')
-      }
+      },
     ]
-  }
+  },
+  {
+    label: '预览',
+    path: '/networkManage/networkMaintenance',
+    name: 'Preview',
+    component: () => import('@/views/pages/preview/pdfView.vue'),
+  },
 
 ]
 
@@ -27,8 +33,8 @@ const routes = [
   {
     path: '/mainIndex',
     name: 'MainIndex',
-    component: () => import('@/views/system/home/index.vue'),
-    // children:pageRoute
+    component: () => import('@/layouts/Layout.vue'),
+    children:pageRoute
   },
 ]
 

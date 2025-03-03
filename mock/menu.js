@@ -1,3 +1,14 @@
+/**
+ * 菜单码格式要求
+ * 
+ * hidden：此属性用于是否展示菜单码。有：不展示
+ * title: 菜单名称
+ * menuIcon: 菜单图标
+ * url: 菜单对应的路由地址
+ * menuId: 菜单的唯一标识
+ * children: 子菜单
+ */
+
 const menuList = [
   {
     uppMenuCode: "bank-transactionBank",

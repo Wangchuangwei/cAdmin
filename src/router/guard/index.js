@@ -36,6 +36,7 @@ function createPageGuard(router) {
           } else {
             next()
             getMenuList('aa').then(() => {
+              console.log("example:")
               next()
             })
             // getMenuList(storage.getItem('logins')).then(res => {
