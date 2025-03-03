@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import 'normalize.css'
 import '@/styles/main.scss'
+import '@/icon/iconfont.css'
 // import './style.css'
 import App from './App.vue'
 
