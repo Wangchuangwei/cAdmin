@@ -265,3 +265,35 @@
     opacity: 0;
   }
 }
+
+
+/** ----------加载字体--------------------*/
+.loading-mask {
+  position: absolute;
+  top: 67%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading-text {
+  color: #000;
+  font-size: 32px;
+}
+@keyframes upDown {
+  0% {
+      transform: translateY(0px);
+  }
+  20% {
+      transform: translateY(-24px);
+  }
+  40%, 100% {
+      transform: translateY(0px);
+  }
+}
+.loading-text span {
+  display: inline-block;
+  animation: upDown 1.5s ease-in-out infinite;
+}
+/* 利用css变量，给每个文字添加动画延迟 */
+.loading-text span {
+  animation-delay: calc(.1s*var(--i));
+}
