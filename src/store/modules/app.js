@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
+import storage from '@/utils/storageUtil'
 
 export const useAppStore = defineStore('useAppStore', {
   state: () => {
     return {
+      activeIndex: 0, // 当前激活的根菜单
       sidebar: {
         opened: true,
         withoutAnimation: false,
@@ -14,7 +16,28 @@ export const useAppStore = defineStore('useAppStore', {
       language: 'zh',
       // 主题
       theme: 'light',
-     // 灰色模式
+      menusRoot: [], // 有多个子系统
+      menusNoRoot: [], // 仅有一个系统[没有头部菜单],
+    }
+  },
+  actions: {
+    GenerateMenuByMenus(data) {
+      if (data && data.length >= 0) {
+        if (data.length > 0) {
+          storage.setItem({ name: 'menus', value: data })
+          storage.setItem({ name: 'menusType', value: '1'})
+        } else {
+          storage.setItem({ name: 'menus', value: data })
+          storage.setItem({ name: 'menusType', value: '0' })  // 没有子系统
+        }
+        this.SetMenuRoot(data)
+      }
+    },
+    SetMenuRoot(data) {
+      this.menusRoot = data
+    },
+    ActiveRootIndex(data) {
+      this.activeIndex = data
     }
   }
 })

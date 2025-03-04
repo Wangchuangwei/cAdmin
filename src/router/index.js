@@ -2,19 +2,19 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import installRouterGuard from './guard';
 
 export const pageRoute = [
-  {
-    label: '预览',
-    path: '/preview',
-    name: 'Preview',
-    children:[
-      {
-        label: 'pdf预览',
-        type: 'menu',
-        path: 'pdfView',
-        component: () => import('@/views/pages/preview/pdfView.vue')
-      },
-    ]
-  },
+  // {
+  //   label: '预览',
+  //   path: '/preview',
+  //   name: 'Preview',
+  //   children:[
+  //     {
+  //       label: 'pdf预览',
+  //       type: 'menu',
+  //       path: 'pdfView',
+  //       component: () => import('@/views/pages/preview/pdfView.vue')
+  //     },
+  //   ]
+  // },
   {
     label: '预览',
     path: '/networkManage/networkMaintenance',

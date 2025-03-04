@@ -14,7 +14,7 @@ class Storage {
     let options = {};
     //将obj和传进来的params合并
     Object.assign(options,obj,params);
-    console.log("options:", options)
+    // console.log("options:", options)
     if(options.expires){
       //如果options.expires设置了的话
       //以options.name为key，options为值放进去
@@ -43,7 +43,7 @@ class Storage {
       item = item;
     }
     //如果有startTime的值，说明设置了失效时间
-    if(item && item.expireTime){
+    if(item && item.startTime){
       //获取当前时间戳，与startTime比较，判断是否超时
       let currentTime = new Date().getTime();
       if(item.expireTime < currentTime - item.startTime){
@@ -52,7 +52,7 @@ class Storage {
         return false
       }else{
         //如果没有超时，返回对象
-        return item.data;
+        return item.value;
       }
     } else {
       //如果没有设置失效时间，直接返回值
@@ -65,7 +65,6 @@ class Storage {
   }
   //移出全部缓存
   clear(){
-    console.log("clear:")
     sessionStorage.clear();
   }
 }
