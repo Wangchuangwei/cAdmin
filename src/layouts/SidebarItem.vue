@@ -1,6 +1,6 @@
 <template>
   <div  class="selfMenu">
-    <div v-for="(item, index) in routes">
+    <div v-for="(item, index) in routes" :key="item.menuId">
       <!-- 无hidden，无children，有url 为菜单 -->
       <el-menu-item v-if="!item.hasOwnProperty('hidden') && !item.children " :index="item.menuId" @click="navigate(item.url)">
         <i class="menuiconfont iconfont" :class="`icon-${item.menuIcon}`"  :style="{color: colorArray[index%13]}" ></i>
@@ -17,7 +17,7 @@
           <i class="menuiconfont iconfont" :class="`icon-${item.menuIcon}`"  :style="{color: colorArray[index%13]}" ></i>
           <span>{{ item.title }}</span>
         </template>
-        <template v-for="(child, i) in item.children">
+        <template v-for="(child, i) in item.children" :key="i.menuId">
           <!-- 继续递归遍历 -->
            <sidebar-item v-if="!child.hidden" class="menu-indent nest-menu" :routes="[child]"></sidebar-item>
         </template>

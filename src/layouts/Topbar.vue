@@ -9,6 +9,23 @@
         <el-icon><RefreshRight /></el-icon>
       </div>
     </div>
+    <div class="header__content__nav">
+      <template v-if="!isMergeMenu && menusRoot.length > 0">
+        <div class="h-system-list">
+          <div class="h-system-item">
+            <el-menu :default-active="activeIndex" mode="horizontal" style="height: 100%" >
+              <el-menu-item   
+                  v-for="(item, index) in menusRoot" 
+                  :key="item.menuId" 
+                  :index='item.menuId' 
+                >
+                  {{ item.title }}
+                </el-menu-item>       
+            </el-menu>
+          </div>
+        </div>
+      </template>
+    </div>
     <div class="header__content__right">
       <div class="contruller">
         <el-icon><Search /></el-icon>
@@ -59,8 +76,39 @@ import {
   SwitchButton,
 } from "@element-plus/icons-vue";
 import { useAppStore } from "@/store/modules/app";
+import { router } from '@/router';
 
 const appStore = useAppStore();
+
+const isMergeMenu = window.LOCAL_CONFIG.isMergeMenu
+const menusRoot = appStore.menusRoot
+let activeIndex = ref(0)
+
+
+//获取子系统首个路由页面
+const getFirstUrl = (children) => {
+  if (children && children.length > 0) {
+    if (children[0].children && children[0].children.length > 0) {
+      getFirstUrl(children[0].children[0]);
+    } else if (children[0].url) {
+
+      router.push({path: children[0].url})
+      return true
+    }
+  }
+};
+
+//切换子系统，更新对应的sidebar
+const activeSidebar = (index, menuId, systemCode) => {
+  if (index >= 0) {
+    // menusRoot[index].children = menusRoot[index].children
+
+    appStore.ActiveRootIndex(index)
+  }
+  //跳转子系统首个路由页面
+  getFirstUrl(this.menusRoot[index].children);
+}
+
 const toFold = () => {
   appStore.opened = !appStore.opened;
 };
@@ -78,7 +126,7 @@ const sureToExit = () => {
 };
 
 onMounted(() => {
-  console.log("Header");
+  activeIndex.value = appStore.activeIndex
 });
 </script>
 
@@ -97,6 +145,23 @@ onMounted(() => {
   gap: 10px;
   height: 100%;
   align-items: center;
+}
+.header__content__nav {
+  flex: 1;
+  padding: 0 50px;
+
+  .h-system-list {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    .h-system-item {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 .header__content__right {
   display: flex;

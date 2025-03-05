@@ -35,69 +35,6 @@ const isCollapse = computed(() => {
   return !sidebar.opened
 })
 
-// const childRoute = [{
-//   "menuCode": "bank-scNetworkManage",
-//   "menuName": "核心企业管理",
-//   "uppMenuCode": "bank-supplyChain",
-//   "menuLevel": "2",
-//   "menuAllot": "1",
-//   "sortNo": "030",
-//   "menuId": "bank-scNetworkManage",
-//   "menuIcon": "mokuaihuaguanli_1_",
-//   "menuHerf": null,
-//   "menuScope": "4001",
-//   "menuType": "A",
-//   "menuKind": null,
-//   "menuVerify": null,
-//   "menuDisplay": null,
-//   "menuChecked": null,
-//   "trCode": null,
-//   "subsystemCode": "supplyChain",
-//   "folderCode": "supplyChain",
-//   "workflowFlag": "0",
-//   "workflowAssigneeMode": null,
-//   "iconFlag": "0",
-//   "isKeepAlive": "1",
-//   "isAdmin": "1",
-//   "isOperator": "1",
-//   "title": "核心企业管理",
-//   "url": null,
-//   "children": [
-//     {
-//       "menuCode": "bank-scNetworkMaintenance",
-//       "menuName": "核心企业维护",
-//       "uppMenuCode": "bank-scNetworkManage",
-//       "menuLevel": "4",
-//       "menuAllot": "1",
-//       "sortNo": "010",
-//       "menuId": "bank-scNetworkMaintenance",
-//       "menuIcon": 'mokuaihuaguanli_1_',
-//       "menuHerf": "/supplyChain/networkManage/networkMaintenance",
-//       "menuScope": "4001",
-//       "menuType": "A",
-//       "menuKind": null,
-//       "menuVerify": null,
-//       "menuDisplay": null,
-//       "menuChecked": null,
-//       "trCode": null,
-//       "subsystemCode": "supplyChain",
-//       "folderCode": "supplyChain",
-//       "workflowFlag": "0",
-//       "workflowAssigneeMode": null,
-//       "iconFlag": "0",
-//       "isKeepAlive": "1",
-//       "isAdmin": "1",
-//       "isOperator": "1",
-//       "title": "核心企业维护",
-//       "url": "/networkManage/networkMaintenance",
-//       "children": [],
-//       "_id": "36",
-//       "originalUrl": "/supplyChain/networkManage/networkMaintenance"
-//     }
-//   ],
-//   "isActived": true
-// }]
-
 // 获取当前子系统菜单数据
 const computChildRoute = () => {
   if (menusType && menusType == '1' && menusRoot.length > 0) { // 多个子系统
@@ -111,13 +48,12 @@ const computChildRoute = () => {
     } else { // 不合并菜单
       childRouteData = menusRoot[activeIndex].children
     }
-
   } else { // 单个系统
     childRouteData = menusNoRoot
   }
 }
 
-    // 获取菜单父级列表covertMenu
+// 获取菜单父级列表covertMenu
 const rebuildMenu =  (menus) => {
   if (menus && menus.length > 0) {
     for (let menu of menus) {
@@ -127,21 +63,12 @@ const rebuildMenu =  (menus) => {
   }
 }
 
-const classObject = computed(() => {
-  return {
-    'h-sidebar-focus': sidebarFocus.value == true,
-    'h-sidebar-blur': sidebarFocus.value == false,
-    'openedSidebar': !isCollapse
-  }
-})
-
-watchEffect(() => {
-  
+const rebuildChildeMenu = () => {
   firstMountTop = {};
   firstMountMaxHeight = {};
   covertMenu = {};
   rebuildMenu(childRouteData);
-
+  console.log("example childRouteData:", childRouteData)
   if (childRouteData && childRouteData.length > 0) {
     childRoute = []
     childRouteData.forEach((item, index) => {
@@ -157,16 +84,22 @@ watchEffect(() => {
           newItem.isActived = true;
         }
       }
-
       childRoute.push(newItem);
     })
     console.log("childRoute:", childRoute)
   }
+}
 
+const classObject = computed(() => {
+  return {
+    'h-sidebar-focus': sidebarFocus.value == true,
+    'h-sidebar-blur': sidebarFocus.value == false,
+    'openedSidebar': !isCollapse
+  }
 })
-
 
 onBeforeMount(() => {
   computChildRoute()
+  rebuildChildeMenu()
 })
 </script>

@@ -17,6 +17,27 @@
 
 const menuList = [
   {
+    subsystemCode: "cw",
+    menuName: "个人开发平台",
+    menuIcon: '',
+    menuHerf: '',
+    menuId: 'cw-personal',
+    uppMenuCode: "-",
+    menuCode: "cw-personal",
+    menuLevel: "0",
+  },
+  // 基础系统
+  {
+    subsystemCode: "platform",
+    menuName: "基础系统",
+    menuIcon: '',
+    menuHerf: '',
+    menuId: 'platform',
+    uppMenuCode: "cw-personal",
+    menuCode: "platform",
+    menuLevel: "1",
+  },
+  {
     subsystemCode: "platform",
     menuName: "首页",
     menuIcon: 'shouye_1_',
@@ -44,6 +65,37 @@ const menuList = [
     menuId: "jiashi",
     uppMenuCode: "home",
     menuCode: "jiashi",
+    menuLevel: "3",
+  },
+  // 业务系统
+  {
+    subsystemCode: "bussiness",
+    menuName: "业务系统",
+    menuIcon: '',
+    menuHerf: '',
+    menuId: 'bussiness',
+    uppMenuCode: "cw-personal",
+    menuCode: "bussiness",
+    menuLevel: "1",
+  },
+  {
+    subsystemCode: "bussiness",
+    menuName: "首页",
+    menuIcon: 'shouye_1_',
+    menuHerf: "/platform/home",
+    menuId: "home12",
+    uppMenuCode: "bussiness",
+    menuCode: "home12",
+    menuLevel: "2",
+  },
+  {
+    subsystemCode: "bussiness",
+    menuName: "个人",
+    menuIcon: 'shouye_1_',
+    menuHerf: "/platform/home/personal",
+    menuId: "personal12",
+    uppMenuCode: "home12",
+    menuCode: "personal12",
     menuLevel: "3",
   },
   // {
