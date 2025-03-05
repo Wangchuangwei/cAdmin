@@ -43,7 +43,7 @@ function registRouter(appStore, to, next) {
     //let curMenu=[]
     let toArr = to.path.split('/')
     let path =to.path+to.hash
-    console.log("to:", to)
+    console.log("to:", to, appStore.menusRoot)
     if (toArr && toArr[1] !== '') {
       appStore.menusRoot.some((item, index) => {
         let res = findRouterToMenu(path, item.children);

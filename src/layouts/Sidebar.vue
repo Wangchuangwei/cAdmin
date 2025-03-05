@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import {watchEffect, ref, computed, reactive, onBeforeMount } from 'vue'
+import {watchEffect, ref, computed, reactive, onBeforeMount, onMounted } from 'vue'
 import storage from '@/utils/storageUtil'
 import {useAppStore} from '@/store/modules/app'
 
@@ -37,8 +37,10 @@ const isCollapse = computed(() => {
 
 // 获取当前子系统菜单数据
 const computChildRoute = () => {
+  console.log("menusType, menusRoot:",menusType, menusRoot)
   if (menusType && menusType == '1' && menusRoot.length > 0) { // 多个子系统
     let isMergeMenu = window.LOCAL_CONFIG.isMergeMenu
+    console.log("isMergeMenu, menusRoot:",isMergeMenu, menusRoot)
     if (isMergeMenu) {  // 合并菜单
       let tempRoute = []
       menusRoot.forEach(item => {
@@ -51,6 +53,7 @@ const computChildRoute = () => {
   } else { // 单个系统
     childRouteData = menusNoRoot
   }
+  console.log("data:",childRouteData)
 }
 
 // 获取菜单父级列表covertMenu
@@ -101,5 +104,17 @@ const classObject = computed(() => {
 onBeforeMount(() => {
   computChildRoute()
   rebuildChildeMenu()
+})
+setTimeout(() => {
+  // computChildRoute()
+  console.log("appStore.menusRoot111:",appStore)
+}, 1000)
+
+onBeforeMount(() => {
+  computChildRoute()
+})
+
+onMounted(() => {
+  console.log("appStore, appStore.menusRoot:",appStore, appStore.menusRoot)
 })
 </script>

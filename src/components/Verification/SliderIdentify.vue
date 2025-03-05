@@ -9,7 +9,7 @@
     <div 
       ref="moveDiv" 
       id="moveDiv"
-      :class="{ handler_ok_bg: !confirmSuccess }"
+      :class="{ handler_ok_bg: confirmSuccess }"
       class="handler handler_bg"
       style="position: absolute; top: 0px; left: 0px;"  
       @mousedown="mousedownFn($event)"
@@ -45,8 +45,6 @@ const mousemoveFn = (e) => {
       moveDiv.value.style.left = width + 'px'
       dragBg.value.style.width = width + 'px'
 
-      moveDiv.value.classList.remove('success');
-      moveDiv.value.classList.add('default'); // 切换为默认状态
     } else if (width > maxWidth.value) {
       successFn()
     }
@@ -71,9 +69,6 @@ const successFn = () => {
   dragText.value.style.color = '#fff'
   moveDiv.value.style.left = maxWidth.value + 'px'
   dragBg.value.style.width = maxWidth.value + 'px'
-
-  moveDiv.value.classList.remove('default');
-  moveDiv.value.classList.add('success'); // 切换为成功状态
 }
 
 const reset = () => {
@@ -89,7 +84,6 @@ const reset = () => {
 }
 
 onMounted(() => {
-  moveDiv.value.classList.add('default');
   maxWidth.value = dragDiv.value.clientWidth - moveDiv.value.clientWidth
   on(document.getElementById('moveDiv'), 'mousemove', mousemoveFn)
   on(document.getElementById('moveDiv'), 'mouseup', mouseupFn)
@@ -130,26 +124,11 @@ onMounted(() => {
   cursor: move;
 }
 
-.handler_bg::before {
-  font-family: 'iconfont'; 
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 25px; 
-  color: #333; 
+.handler_bg {
+  background: url(@/assets/svg/darrowright.svg)  no-repeat center / contain;;
 }
-/* 默认状态 */
-.handler_bg.default::before {
-  content: "\e62f"; /* 默认图标 */
+.handler_ok_bg {
+  background: url(@/assets/svg/checkmark.svg)  no-repeat center / contain;;
 }
 
-/* 滑动后的状态 */
-.handler_bg.success::before {
-  content: "\e77d"; /* 新图标 */
-}
 </style>

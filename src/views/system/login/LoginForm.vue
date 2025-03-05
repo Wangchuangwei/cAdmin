@@ -12,7 +12,7 @@
                 <el-input name="userNo" type="text" v-model="loginForm.userNo" autocomplete="on" placeholder="请填写用户号"
                   ref='username1' :lengthByByte="true" :byteNum='2' :maxlength="12">
                   <template #prepend>    
-                    <i class="iconfont icon-avatar"></i>
+                    <el-icon><User /></el-icon>
                   </template>
                 </el-input>
               </el-form-item>
@@ -20,7 +20,7 @@
                 <el-input name="_passwd" type="password" v-model="loginForm._passwd" autocomplete="on" placeholder="请填写用户密码"
                   ref='username' @keyup.enter.native="handleLogin" show-password>
                   <template #prepend>
-                    <i class="iconfont icon-lock"></i>
+                    <el-icon><Lock /></el-icon>
                   </template>
                 </el-input>
               </el-form-item>
