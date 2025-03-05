@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4843927 */
-  src: url('iconfont.woff2?t=1740998164122') format('woff2'),
-       url('iconfont.woff?t=1740998164122') format('woff'),
-       url('iconfont.ttf?t=1740998164122') format('truetype');
+  src: url('iconfont.woff2?t=1741175617040') format('woff2'),
+       url('iconfont.woff?t=1741175617040') format('woff'),
+       url('iconfont.ttf?t=1741175617040') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,250 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-more:before {
+  content: "\e625";
+}
+
+.icon-question:before {
+  content: "\e630";
+}
+
+.icon-check:before {
+  content: "\e60d";
+}
+
+.icon-clock:before {
+  content: "\e624";
+}
+
+.icon-plus:before {
+  content: "\e95e";
+}
+
+.icon-circle-plus:before {
+  content: "\e67d";
+}
+
+.icon-info:before {
+  content: "\e60e";
+}
+
+.icon-delete:before {
+  content: "\e684";
+}
+
+.icon-close:before {
+  content: "\e626";
+}
+
+.icon-hideinvisiblehidden:before {
+  content: "\e9cf";
+}
+
+.icon-circle-check-lined:before {
+  content: "\e61c";
+}
+
+.icon-warning:before {
+  content: "\e683";
+}
+
+.icon-avatar:before {
+  content: "\e627";
+}
+
+.icon-Minus:before {
+  content: "\e628";
+}
+
+.icon-view:before {
+  content: "\e6aa";
+}
+
+.icon-zoom-out:before {
+  content: "\ece9";
+}
+
+.icon-s-operation:before {
+  content: "\e67a";
+}
+
+.icon-position:before {
+  content: "\e690";
+}
+
+.icon-zoom-in:before {
+  content: "\e792";
+}
+
+.icon-edit:before {
+  content: "\e67b";
+}
+
+.icon-filter:before {
+  content: "\e67e";
+}
+
+.icon-full-screen:before {
+  content: "\e685";
+}
+
+.icon-download:before {
+  content: "\e614";
+}
+
+.icon-list:before {
+  content: "\e657";
+}
+
+.icon-upload:before {
+  content: "\e60f";
+}
+
+.icon-location_light:before {
+  content: "\e7f3";
+}
+
+.icon-MICROPHONE:before {
+  content: "\e6b2";
+}
+
+.icon-pdf:before {
+  content: "\e8e8";
+}
+
+.icon-folder-add:before {
+  content: "\e7d1";
+}
+
+.icon-DOC:before {
+  content: "\e615";
+}
+
+.icon-img:before {
+  content: "\e617";
+}
+
+.icon-document:before {
+  content: "\e60b";
+}
+
+.icon-jiashicang:before {
+  content: "\e60c";
+}
+
+.icon-microphoneoff:before {
+  content: "\e6ec";
+}
+
+.icon-document-copy:before {
+  content: "\e653";
+}
+
+.icon-document1:before {
+  content: "\e654";
+}
+
+.icon-document-add:before {
+  content: "\e655";
+}
+
+.icon-files:before {
+  content: "\e656";
+}
+
+.icon-sort:before {
+  content: "\e66b";
+}
+
+.icon-iPhone:before {
+  content: "\e63c";
+}
+
+.icon-guanlijiashicang:before {
+  content: "\e610";
+}
+
+.icon-setup:before {
+  content: "\e62e";
+}
+
+.icon-DarrowLeft:before {
+  content: "\e62d";
+}
+
+.icon-DarrowRight:before {
+  content: "\e62f";
+}
+
+.icon-FolderDelete:before {
+  content: "\e694";
+}
+
+.icon-d-caret:before {
+  content: "\e80e";
+}
+
+.icon-camera-filled:before {
+  content: "\e658";
+}
+
+.icon-videocamera-filled:before {
+  content: "\eb16";
+}
+
+.icon-document-delete:before {
+  content: "\e678";
+}
+
+.icon-document-remove:before {
+  content: "\e679";
+}
+
+.icon-expand:before {
+  content: "\e67c";
+}
+
+.icon-fold:before {
+  content: "\e67f";
+}
+
+.icon-folder-remove:before {
+  content: "\e682";
+}
+
+.icon-set-up:before {
+  content: "\e6af";
+}
+
+.icon-video-pause:before {
+  content: "\e6c6";
+}
+
+.icon-video-play:before {
+  content: "\e6c7";
+}
+
+.icon-qq:before {
+  content: "\e600";
+}
+
+.icon-weixin:before {
+  content: "\e604";
+}
+
+.icon-zhongyingwenyingwen:before {
+  content: "\e681";
+}
+
+.icon-tiaoseban:before {
+  content: "\e609";
+}
+
+.icon-github:before {
+  content: "\e60a";
 }
 
 .icon-fanhui:before {
