@@ -13,7 +13,7 @@ import {viteMockServe} from 'vite-plugin-mock'
 export default defineConfig(({command, mode, ssrBuild}) => {
   const env = loadEnv(mode, process.cwd())
   return {
-    base: '/framework/',
+    base: '/frame-layout/',
     resolve: {
       alias: [
         {

@@ -1,15 +1,12 @@
 import {useUserStore} from '@/store/modules/user'
+import {useAppStore} from '@/store/modules/app'
 import storage from '@/utils/storageUtil'
 import {arrayToTree, cloneObj } from '@/utils/arrayUtils'
 
 import { getMenuList } from '@/api/system/login'
 
-import {useAppStore} from '@/store/modules/app'
-import { createPinia } from 'pinia';
 
 const whiteList = ['/login', '/forgetPasswd', '/beforepage'] // no redirect whitelist
-const pinia = createPinia()
-const appStore = useAppStore(pinia)
 
 export default function installRouterGuard(router) {
   createPageGuard(router)
@@ -38,7 +35,7 @@ function findRouterToMenu(toHash, menus) {
 }
 
 // 后续用于针对多个导航栏进去不同系统的展示   用于根据权限生成路由
-function registRouter(to, next) {
+function registRouter(appStore, to, next) {
   if (storage.getItem('menusType') == '0') {
     // 没有子系统的显示，只有菜单栏,根据views所在的名称进行获取对应router/store/locale等【极端情况】
   } else {
@@ -50,6 +47,7 @@ function registRouter(to, next) {
     if (toArr && toArr[1] !== '') {
       appStore.menusRoot.some((item, index) => {
         let res = findRouterToMenu(path, item.children);
+        console.log("res:", res)
         if (res && res.subsystemCode=== item.subsystemCode) {
           appStore.ActiveRootIndex(index)
           curSYSName = res.subsystemCode
@@ -76,6 +74,7 @@ function insertStr(source,start,newStr){
 function createPageGuard(router) {
   router.beforeEach(async (to, from, next) => {
     const userStore = useUserStore()
+    const appStore = useAppStore()
     if (window.LOCAL_CONFIG.isToken) {
       if (userStore.token) {
         if (to.fullPath === '/login' || to.fullPath === '/' ) {
@@ -85,10 +84,10 @@ function createPageGuard(router) {
           // console.log("menus.length, appStore.menusRoot.length:", menus.length, appStore.menusRoot.length)
           if (Array.isArray(menus) && menus.length >= 0 && appStore.menusRoot.length <= 0) { // 处理F5刷新丢失menusRoot
             appStore.GenerateMenuByMenus(menus)
-            registRouter(to, next)
+            registRouter(appStore, to, next)
           } else if (Array.isArray(menus) && menus.length >= 0 && appStore.menusRoot.length > 0) {
             appStore.GenerateMenuByMenus(menus)
-            registRouter(to, next)
+            registRouter(appStore, to, next)
           } else {
             const res = await getMenuList(storage.getItem('logins'))
             if (res && res.data) {
@@ -99,13 +98,14 @@ function createPageGuard(router) {
               })
               let tempWorkList = [];
               let menuObj = {}
-              // // cloneObj(data).forEach(item => {
-              data.forEach(item => {
+              cloneObj(data).forEach(item => {
+              // data.forEach(item => {
                 // 筛选出非按钮级别的菜单
                 item.title = item.menuName;
                 if(item.menuHerf){
                   let idx= item.menuHerf.indexOf("/",1)
-                  let newUrl = insertStr(item.menuHerf,idx,'/#')
+                  // let newUrl = insertStr(item.menuHerf,idx,'/#')
+                  let newUrl = insertStr(item.menuHerf,idx,'')
                   item.url = newUrl;
                   menuObj[newUrl] = item
                 }else{
@@ -126,7 +126,7 @@ function createPageGuard(router) {
                 console.log("to123:", to)
                 next();
               } else {
-                registRouter(to, next)
+                registRouter(appStore, to, next)
               }
             } else {
               if (to.path === "/mainIndex" || to.path === "/modPasswd") {

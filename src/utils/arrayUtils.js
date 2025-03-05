@@ -5,7 +5,7 @@
  * @param {Object} obj
  */
 export function  cloneObj(obj) {
-  let str, newobj = obj.constructor === Array ? [] : {};
+  let str, newobj = Array.isArray(obj) ? [] : {};
   if (typeof obj !== 'object') {
       return;
   } else {

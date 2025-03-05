@@ -2,24 +2,15 @@ import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router
 import installRouterGuard from './guard';
 
 export const pageRoute = [
-  // {
-  //   label: '预览',
-  //   path: '/preview',
-  //   name: 'Preview',
-  //   children:[
-  //     {
-  //       label: 'pdf预览',
-  //       type: 'menu',
-  //       path: 'pdfView',
-  //       component: () => import('@/views/pages/preview/pdfView.vue')
-  //     },
-  //   ]
-  // },
   {
-    label: '预览',
-    path: '/networkManage/networkMaintenance',
-    name: 'Preview',
+    path: '/platform/home/personal',
+    name: 'personal',
     component: () => import('@/views/pages/preview/pdfView.vue'),
+  },
+  {
+    path: '/platform/home/jiashi',
+    name: 'jiashi',
+    component: () => import('@/views/pages/dashboard/analysis.vue'),
   },
 
 ]
@@ -40,6 +31,8 @@ const routes = [
 
 // 路由实例
 export const router = createRouter({
+  // 添加基础路径
+  base: '/frame-layout/',
   // 创建hash历史记录
   history: createWebHashHistory(),
   // 初始路由列表

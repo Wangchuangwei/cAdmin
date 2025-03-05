@@ -11,10 +11,8 @@
               <el-form-item prop="userNo">
                 <el-input name="userNo" type="text" v-model="loginForm.userNo" autocomplete="on" placeholder="请填写用户号"
                   ref='username1' :lengthByByte="true" :byteNum='2' :maxlength="12">
-                  <template #prepend>
-                    <el-icon>
-                      <User />
-                    </el-icon>
+                  <template #prepend>    
+                    <i class="iconfont icon-avatar"></i>
                   </template>
                 </el-input>
               </el-form-item>
@@ -22,9 +20,7 @@
                 <el-input name="_passwd" type="password" v-model="loginForm._passwd" autocomplete="on" placeholder="请填写用户密码"
                   ref='username' @keyup.enter.native="handleLogin" show-password>
                   <template #prepend>
-                    <el-icon>
-                      <Lock />
-                    </el-icon>
+                    <i class="iconfont icon-lock"></i>
                   </template>
                 </el-input>
               </el-form-item>
@@ -33,7 +29,7 @@
                   autocomplete="on" placeholder="请填写图形验证码"
                   @keyup.enter.native="handleLogin">
                   <template #prepend>
-                    <el-icon><CircleCheck /></el-icon>
+                    <i class="iconfont icon-circle-check-lined"></i>
                   </template>
                 </el-input>
                 <div class="login-smsCodePass">

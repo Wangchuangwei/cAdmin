@@ -44,6 +44,9 @@ const mousemoveFn = (e) => {
     if (width > 0 && width <= maxWidth.value) {
       moveDiv.value.style.left = width + 'px'
       dragBg.value.style.width = width + 'px'
+
+      moveDiv.value.classList.remove('success');
+      moveDiv.value.classList.add('default'); // 切换为默认状态
     } else if (width > maxWidth.value) {
       successFn()
     }
@@ -68,11 +71,15 @@ const successFn = () => {
   dragText.value.style.color = '#fff'
   moveDiv.value.style.left = maxWidth.value + 'px'
   dragBg.value.style.width = maxWidth.value + 'px'
+
+  moveDiv.value.classList.remove('default');
+  moveDiv.value.classList.add('success'); // 切换为成功状态
 }
 
 const reset = () => {
   moveDiv.value.style.left = 0 + 'px'
   dragBg.value.style.width = 0 + 'px'
+  moveDiv.value.classList.add('default');
   dragText.value.style.color = '#333'
   confirmSuccess.value = false
   mousePressing.value = false
@@ -82,6 +89,7 @@ const reset = () => {
 }
 
 onMounted(() => {
+  moveDiv.value.classList.add('default');
   maxWidth.value = dragDiv.value.clientWidth - moveDiv.value.clientWidth
   on(document.getElementById('moveDiv'), 'mousemove', mousemoveFn)
   on(document.getElementById('moveDiv'), 'mouseup', mouseupFn)
@@ -122,7 +130,26 @@ onMounted(() => {
   cursor: move;
 }
 
-.handler_bg {
-  background: #fff url(@/assets/login/crude.svg)
+.handler_bg::before {
+  font-family: 'iconfont'; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px; 
+  color: #333; 
+}
+/* 默认状态 */
+.handler_bg.default::before {
+  content: "\e62f"; /* 默认图标 */
+}
+
+/* 滑动后的状态 */
+.handler_bg.success::before {
+  content: "\e77d"; /* 新图标 */
 }
 </style>
