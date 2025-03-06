@@ -31,7 +31,7 @@
       <div class="contruller">
         <el-icon><Search /></el-icon>
       </div>
-      <div class="contruller">
+      <div class="contruller" @click="openSetting">
         <el-icon><Setting /></el-icon>
       </div>
       <div class="contruller">
@@ -59,6 +59,7 @@
         </el-popover>
       </div>
     </div>
+    <ConfigSettingVue v-model="showConfigSetting"></ConfigSettingVue>
   </div>
 </template>
 
@@ -80,6 +81,8 @@ import { useAppStore } from "@/store/modules/app";
 import {useUserStore} from '@/store/modules/user';
 import { router } from '@/router';
 import storage from '@/utils/storageUtil'
+
+import ConfigSettingVue from "./ConfigSetting.vue";
 
 const appStore = useAppStore();
 const userStore = useUserStore();
@@ -124,6 +127,12 @@ const reFresh = () => {
 
 const toLock = () => {
   console.log("锁定屏幕");
+};
+
+const showConfigSetting = ref(false);
+const openSetting = () => {
+  console.log("打开设置");
+  showConfigSetting.value = !showConfigSetting.value;
 };
 
 const sureToExit = () => {

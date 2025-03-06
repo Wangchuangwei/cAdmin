@@ -16,6 +16,7 @@ export const useAppStore = defineStore('useAppStore', {
       language: 'zh',
       // 主题
       theme: 'light',
+      pColor: '#165dff',
       menusRoot: [], // 有多个子系统
       menusNoRoot: [], // 仅有一个系统[没有头部菜单],
     }
