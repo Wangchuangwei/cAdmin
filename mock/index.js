@@ -31,4 +31,12 @@ export default [
       return { respType: "S", data: menuList }
     },
   },
+  // 用户退出接口
+  {
+    url: '/tbsp/user/logout',//请求地址
+    method: 'post',//请求方式
+    response: ({ body }) => {
+      return { respType: "S" }
+    },
+  },
 ]

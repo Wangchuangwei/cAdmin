@@ -13,6 +13,13 @@ export function login(userInfo) {
   })
 }
 
+// 退出登录
+export function logout() {
+  return new Promise((resolve, reject) => {
+    resolve(fetch.post('/tbsp/user/logout', {}))
+  })
+}
+
 export function getMenuList(logins) {
   return new Promise((resolve, reject) => {
     resolve(fetch.post('/tbsp/user/getMenuList', logins))

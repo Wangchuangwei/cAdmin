@@ -1,4 +1,4 @@
-import {login} from '@/api/system/login'
+import {login, logout} from '@/api/system/login'
 import storage from '@/utils/storageUtil'
 
 import {defineStore} from 'pinia';
@@ -39,6 +39,19 @@ export const useUserStore =  defineStore('useUserStore', {
         }).catch(error => {
           reject(error)
         })
+      })
+    },
+    async logout() {
+      return new Promise((resolve, reject) => {
+        logout().then(res => {
+          storage.clear();//清空全部缓存
+          this.userInfo = {}
+          this.token = ''
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+
       })
     }
   }
