@@ -43,13 +43,12 @@ function registRouter(appStore, to, next) {
     //let curMenu=[]
     let toArr = to.path.split('/')
     let path =to.path+to.hash
-    console.log("to:", to, appStore.menusRoot)
+    // console.log("to:", to, appStore.menusRoot)
     if (toArr && toArr[1] !== '') {
       appStore.menusRoot.some((item, index) => {
         let res = findRouterToMenu(path, item.children);
-        console.log("res:", res)
         if (res && res.subsystemCode=== item.subsystemCode) {
-          appStore.ActiveRootIndex(index)
+          appStore.ActiveRootIndex(index + '')
           curSYSName = res.subsystemCode
           return true
         } else {

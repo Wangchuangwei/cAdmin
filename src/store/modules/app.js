@@ -4,7 +4,7 @@ import storage from '@/utils/storageUtil'
 export const useAppStore = defineStore('useAppStore', {
   state: () => {
     return {
-      activeIndex: 0, // 当前激活的根菜单
+      activeIndex: '0', // 当前激活的根菜单
       sidebar: {
         opened: true,
         withoutAnimation: false,

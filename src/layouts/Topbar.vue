@@ -17,7 +17,8 @@
               <el-menu-item   
                   v-for="(item, index) in menusRoot" 
                   :key="item.menuId" 
-                  :index='item.menuId' 
+                  :index="`${index+''}`"
+                  @click="activeSidebar(index,item.menuId,item.system_code)"
                 >
                   {{ item.title }}
                 </el-menu-item>       
@@ -76,37 +77,41 @@ import {
   SwitchButton,
 } from "@element-plus/icons-vue";
 import { useAppStore } from "@/store/modules/app";
+import {useUserStore} from '@/store/modules/user';
 import { router } from '@/router';
+import storage from '@/utils/storageUtil'
 
 const appStore = useAppStore();
+const userStore = useUserStore();
 
 const isMergeMenu = window.LOCAL_CONFIG.isMergeMenu
 const menusRoot = appStore.menusRoot
-let activeIndex = ref(0)
-
+let activeIndex = ref('0')
 
 //获取子系统首个路由页面
-const getFirstUrl = (children) => {
-  if (children && children.length > 0) {
-    if (children[0].children && children[0].children.length > 0) {
-      getFirstUrl(children[0].children[0]);
-    } else if (children[0].url) {
-
-      router.push({path: children[0].url})
+const getFirstUrl = (el) => {
+  if (el && el.length > 0) {
+    if (el[0].children && el[0].children.length > 0) {
+      getFirstUrl(el[0].children[0]);
+    } else if (el[0].url) {
+      router.push({path: el[0].url})
       return true
     }
+  } else if (el.children && el.children.length > 0) {
+    getFirstUrl(el.children);
+  } else if(el.url) {
+    router.push({path: el.url});
+    return true;
   }
 };
 
 //切换子系统，更新对应的sidebar
 const activeSidebar = (index, menuId, systemCode) => {
   if (index >= 0) {
-    // menusRoot[index].children = menusRoot[index].children
-
     appStore.ActiveRootIndex(index)
   }
   //跳转子系统首个路由页面
-  getFirstUrl(this.menusRoot[index].children);
+  getFirstUrl(menusRoot[index].children);
 }
 
 const toFold = () => {
@@ -123,6 +128,9 @@ const toLock = () => {
 
 const sureToExit = () => {
   console.log("退出登录");
+  userStore.logout().then(() => {
+    location.reload()
+  })
 };
 
 onMounted(() => {

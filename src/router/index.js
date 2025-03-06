@@ -1,19 +1,17 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
-export const pageRoute = [
-  {
-    path: '/platform/home/personal',
-    name: 'personal',
-    component: () => import('@/views/pages/preview/pdfView.vue'),
-  },
-  {
-    path: '/platform/home/jiashi',
-    name: 'jiashi',
-    component: () => import('@/views/pages/dashboard/analysis.vue'),
-  },
+import menuRoute from './routes'
 
-]
+let routerList = []
+for (let menu in menuRoute) {
+  let idx = menu.lastIndexOf('/')
+  routerList.push({
+    name: menu.slice(idx + 1),
+    path: menu,
+    component: menuRoute[menu],
+  })
+}
 
 const routes = [
   {
@@ -25,7 +23,7 @@ const routes = [
     path: '/mainIndex',
     name: 'MainIndex',
     component: () => import('@/layouts/Layout.vue'),
-    children:pageRoute
+    children: routerList
   },
 ]
 

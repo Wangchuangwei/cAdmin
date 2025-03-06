@@ -80,7 +80,7 @@ const menuList = [
   },
   {
     subsystemCode: "bussiness",
-    menuName: "首页",
+    menuName: "首页12",
     menuIcon: 'shouye_1_',
     menuHerf: "/platform/home",
     menuId: "home12",
@@ -90,9 +90,9 @@ const menuList = [
   },
   {
     subsystemCode: "bussiness",
-    menuName: "个人",
+    menuName: "个人23",
     menuIcon: 'shouye_1_',
-    menuHerf: "/platform/home/personal",
+    menuHerf: "/platform/home/personal12",
     menuId: "personal12",
     uppMenuCode: "home12",
     menuCode: "personal12",

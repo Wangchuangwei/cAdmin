@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, toRefs } from 'vue';
 import { router } from '@/router';
 
 defineOptions({name: 'sidebar-item'})
@@ -40,14 +40,8 @@ const props = defineProps({
 
 const colorArray = ['#406EE8','#13C2C2','#33CA66','#EF4864','#8543E0','#2F32CE','#2E9AFF','#089B79','#EA22AB','#E64807','#FF7B63','#8065F5','#CE64E5']
 const navigate = (url) => {
-  // window.open(url)
-  console.log("url:", url)
   router.push(url)
 }
-
-onMounted(() => {
-  console.log("props.routes:", props.routes)
-})
 </script>
 
 <style lang="scss" scoped>
