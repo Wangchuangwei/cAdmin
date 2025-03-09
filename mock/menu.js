@@ -39,7 +39,7 @@ const menuList = [
   },
   {
     subsystemCode: "platform",
-    menuName: "首页",
+    menuName: "概览",
     menuIcon: 'shouye_1_',
     menuHerf: "/platform/home",
     menuId: "home",
@@ -49,7 +49,7 @@ const menuList = [
   },
   {
     subsystemCode: "platform",
-    menuName: "个人",
+    menuName: "分析台",
     menuIcon: 'shouye_1_',
     menuHerf: "/platform/home/personal",
     menuId: "personal",
@@ -80,7 +80,7 @@ const menuList = [
   },
   {
     subsystemCode: "bussiness",
-    menuName: "首页12",
+    menuName: "概览",
     menuIcon: 'shouye_1_',
     menuHerf: "/platform/home",
     menuId: "home12",
@@ -90,7 +90,7 @@ const menuList = [
   },
   {
     subsystemCode: "bussiness",
-    menuName: "个人23",
+    menuName: "工作台",
     menuIcon: 'shouye_1_',
     menuHerf: "/platform/home/personal12",
     menuId: "personal12",
