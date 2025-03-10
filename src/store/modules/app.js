@@ -39,6 +39,9 @@ export const useAppStore = defineStore('useAppStore', {
     },
     ActiveRootIndex(data) {
       this.activeIndex = data
+    },
+    AddVisitedViews(data) {
+      
     }
   }
 })

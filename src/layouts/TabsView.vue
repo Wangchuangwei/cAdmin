@@ -26,7 +26,13 @@
 </template>
 
 <script setup>
-import {ref, reactive} from 'vue'
+import {ref, reactive, watch, computed, nextTick} from 'vue'
+import {useRoute} from 'vue-router'
+
+import {useAppStore} from '@/store/modules/app'
+
+const route = useRoute()
+const appStore = useAppStore()
 
 const styles = reactive({})
 
@@ -41,6 +47,19 @@ const handleCloseAll = () => {
 const handleCloseOther = () => {
 
 }
+
+// 添加tab
+const addViews = () => {
+  console.log("route12:", route)
+  appStore.AddVisitedViews(route)
+}
+
+watch(route, (to) => {
+  addViews()
+  nextTick(() => {
+    // getActiveMenuByRouter(to.path, childRoute)
+  })
+})
 </script>
 
 <style lang="scss" scoped>
