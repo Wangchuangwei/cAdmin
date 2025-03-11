@@ -22,31 +22,74 @@
 import {ref} from "vue"
 import { getAssetURL } from '@/utils/common'
 
+const emit = defineEmits(['updateChildNode']) 
+
+const props = defineProps({
+  childNode: {
+    type: Array,
+    default: () => []
+  },
+  type: {
+    type: String,
+    default: 'add'
+  }
+})
+
 const nodeConfig = {
   type: 0
 }
 
 const addNode = () => {
-  console.log('addNode')
-  // nodeConfig.type = 0
-  // emit('addNode', nodeConfig)
 }
 
 const addNodeType = (type) => {
+  console.log("props.childNode:", props.childNode)
   if (type === 1) {
-    let data
-    data = {
+    emit('updateChildNode', {
       type: 1,
       nodeName:"",
-      childNode: props.childNode,
       approverType:"",
+      approverNodeType:"1",
       assigneeList:[],
-    }
-    emit('addNode', nodeConfig)
+      childNode: props.childNode,
+    })
+  } else if (type === 3) {
+    emit('updateChildNode', {
+      type: 3,
+      nodeName: "路由",
+      childNode: props.childNode,
+      conditionNodes: [
+        {
+          type: 2,
+          nodeName: "",
+          priorityLevel: 1,
+          conditionType: "0",
+          childNode: {
+            type: 1,
+            nodeName: "",
+            approverType: "",
+            approverNodeType:"0",
+            assigneeList: [],
+            childNode: null,
+          },
+        },
+        {
+          type: 2,
+          nodeName: "",
+          priorityLevel: 999,
+          conditionType: "1",
+          childNode: {
+            type: 1,
+            nodeName: "",
+            approverType: "",
+            approverNodeType:"0",
+            assigneeList: [],
+            childNode: null,
+          },
+        }
+      ]
+    })
   }
-
-//   nodeConfig.type = type
-
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="cAdmin__container">
-    <node-wrap :nodeConfig="nodeConfig"></node-wrap>
+    <node-wrap :nodeConfigs="nodeConfig" type="add"></node-wrap>
   </div>
 </template>
 
@@ -10,7 +10,16 @@ import { getAssetURL } from '@/utils/common'
 import nodeWrap from "@/components/TodoWork/NodeWrap.vue";
 
 const nodeConfig = {
-  type: 0
+  type: 0,
+  childNode: null,
+  // childNode: {
+  //   type: 1,
+  //   nodeName:"",
+  //   approverType:"",
+  //   approverNodeType:"1",
+  //   assigneeList:[],
+  //   childNode: null,
+  // }
 }
 
 </script>
@@ -21,6 +30,7 @@ const nodeConfig = {
   width: 100%;
   max-height: calc(100vh - 92px);
   padding-bottom: 16px;
+  background: #fff;
 }
 
 </style>
