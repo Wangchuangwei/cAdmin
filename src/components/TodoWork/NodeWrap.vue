@@ -7,7 +7,7 @@
           <span v-if="nodeConfig.type === 0">开始</span>
           <template v-else>
             <span>{{showNodeName}}</span>
-            <i class="iconfont icon-close" @click="deleteNode"></i>
+            <i class="iconfont icon-close" @click="deleteNode" v-if="nodeConfig.approverNodeType == '1'"></i>
           </template>
         </div>
         <div class="content" @click="setPerson">
@@ -26,19 +26,36 @@
     <div class="branch-wrap" v-if="nodeConfig.type==3">
       <div class="branch-box-wrap">
         <div class="branch-box">
-          <div class="add-branch" @click="addTerm">添加条件</div>
+          <div class="add-branch" @click="addTermNode">添加条件</div>
           <div class="col-box" v-for="(item,index) in nodeConfig.conditionNodes" :key="index">
             <div class="condition-node">
 							<div class="condition-node-box">
 								<div class="auto-judge" >
-
+									<div class="title-wrapper">
+										<span v-if="item.conditionType=='0'">{{showConditionName(item.nodeName)}}</span>
+										<span v-if="item.conditionType=='1'">其他条件</span>
+                    <i class="iconfont icon-close" @click="deleteTermNode(index)" v-if="item.conditionType == '0'"></i>
+									</div>
+                  <div class="content">
+										<div class="text" v-if="item.conditionType=='0'" :title="conditionStr(nodeConfig, index)">
+											<p class="node-words">{{conditionStr(nodeConfig, index)}}</p>
+										</div>
+										<div class="text" v-else>
+											<span>其他条件</span>
+										</div>
+                  </div>
                 </div>
+                <add-node 
+                  :childNode="item.childNode"
+                  :type="type"
+                  @updateChildNode="(data) => updateItemChildNode(data, item)"
+                ></add-node>
               </div>
             </div>
             <node-wrap
               v-if="item.childNode"
               :nodeConfigs="item.childNode"
-              @updateChildNode="updateChildNode"
+              @updateChildNode11="(data) => updateItemChildNode(data, item)"
             ></node-wrap>
             <template v-if="index==0">
 							<div class="top-left-cover-line"></div>
@@ -50,12 +67,17 @@
 						</template>
           </div>
         </div>
+        <add-node 
+          :childNode="nodeConfig.childNode"
+          :type="type"
+          @updateChildNode="updateChildNode"
+        ></add-node>
       </div>
     </div>
     <node-wrap
       v-if="nodeConfig.childNode"
       :nodeConfigs="nodeConfig.childNode"
-      @updateChildNode="updateChildNode"
+      @updateChildNode11="updateChildNode"
     ></node-wrap>
   </div>
 </template>
@@ -64,7 +86,7 @@
 import {ref, computed, nextTick} from 'vue'
 import addNode from './AddNode.vue'
 
-const emit = defineEmits(['updateChildNode']) 
+const emit = defineEmits(['updateChildNode11']) 
 
 const props = defineProps({
   nodeConfigs: {
@@ -88,7 +110,79 @@ const setPerson = () => {
 }
 
 const deleteNode = () => {
-  emit('updateChildNode', nodeConfig.value.childNode)
+  console.log("curdelte:")
+  emit('updateChildNode11', nodeConfig.value.childNode)
+}
+
+const conditionStr = (nodeConfig, index) => {
+  let data = nodeConfig.conditionNodes[index].conditionList
+  let str = ""
+  if (data && data.length > 0) {
+    data.forEach((item) => {
+      // 如果是金额
+      if (item.propertyType == "Amt") {
+        if (item.propertyMax == "") {
+          str += item.propertyName + ": 大于等于" + item.propertyMin + '; \n'
+        } else {
+          str += item.propertyName + ": " + item.propertyMin + "~" + item.propertyMax + '; \n'
+        }
+      } else {
+        str += item.propertyName + ": " + item.propertyFormulaName + item.propertyValueNameList.join("、") + "; \n"
+      }
+    })
+  } else {
+    str = "添加条件"
+  }
+  return str
+}
+
+const reData = (data, addData) => {
+  if (!data.childNode) {
+    data.childNode = addData
+  } else {
+    reData(data.childNode, addData)
+  }
+}
+
+const addTermNode = () => {
+  let len = nodeConfig.value.conditionNodes.length
+  let addData = {
+    type: 2,
+    nodeName: "",
+    priorityLevel: len,
+    conditionType: "0",
+    conditionList: [],
+    childNode: {
+      type: 1,
+      nodeName: "",
+      approverType: "",
+      approverNodeType:"0",
+      assigneeList: [],
+      childNode: null,
+    },
+  }
+  nodeConfig.value.conditionNodes.splice(len - 1, 0, addData)
+  emit('updateChildNode11', nodeConfig.value)
+}
+
+const deleteTermNode = (index) => {
+  nodeConfig.value.conditionNodes.splice(index, 1)
+  nodeConfig.value.conditionNodes.map((item, index) => {
+    return item.priorityLevel = index + 1
+  })
+  emit('updateChildNode11', nodeConfig.value)
+  if (nodeConfig.value.conditionNodes.length === 1) {
+    if (nodeConfig.value.childNode) {
+      if (nodeConfig.value.conditionNodes[0].childNode) {
+        reData(nodeConfig.value.conditionNodes[0].childNode, nodeConfig.value.childNode)
+      } else {  
+        nodeConfig.value.conditionNodes[0].childNode = nodeConfig.value.childNode
+        nodeConfig.value.conditionNodes[0].childNode.approverNodeType = "1"
+      }
+    }
+    nodeConfig.value.conditionNodes[0].childNode.approverNodeType = "1"
+    emit('updateChildNode11', nodeConfig.value.conditionNodes[0].childNode )
+  } 
 }
 
 const setApproverStr = (nodeConfig) => {
@@ -108,6 +202,10 @@ const setApproverStr = (nodeConfig) => {
   }
 }
 
+const showConditionName = (name) => {
+  return name ? '条件-' + name : '条件' + name
+}
+
 const showNodeName = computed(() => {
   let nodeName = nodeConfig.value.nodeName
   return nodeName ? '复核-' + nodeName : '复核'
@@ -118,6 +216,7 @@ const showText = computed(() => {
 })
 
 const updateChildNode = (data) => {
+  console.log("data, node:", data, nodeConfig.value)
   showFIlag.value = false
   // nodeConfig.value.childNode = data
 
@@ -130,9 +229,35 @@ const updateChildNode = (data) => {
     console.log("nodeConfig.value:", nodeConfig.value)
   })
 }
+
+const updateItemChildNode = (data, item) => {
+  showFIlag.value = false
+  // nodeConfig.value.childNode = data
+  item.childNode = data
+  setTimeout(() => {
+    showFIlag.value = true
+
+  }, 1000)
+}
 </script>
 
 <style lang="scss" scoped>
+.icon-close {
+  // display: none;
+  background: #eb4954;
+  position: absolute;
+  right: 13px;
+  top: 9px;
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 12px;
+  font-size: 12px;
+  font-style: normal;
+}
+
 .node-wrap {
   display: inline-flex;
   width: 100%;
@@ -184,22 +309,6 @@ const updateChildNode = (data) => {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-
-      .icon-close {
-        // display: none;
-        background: #eb4954;
-        position: absolute;
-        right: 13px;
-        top: 9px;
-        width: 14px;
-        height: 14px;
-        color: #fff;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 12px;
-        font-size: 12px;
-        font-style: normal;
-      }
     }
 
     .content {
@@ -351,6 +460,54 @@ const updateChildNode = (data) => {
           }
         }
       }
+    }
+  }
+}
+
+.auto-judge {
+  position: relative;
+  width: 232px;
+  height: 80px;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .15);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .15);
+
+  .title-wrapper {
+    height: 26px;
+    color: #01b7d0;
+    font-size: 14px;
+    padding: 6px 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .content {
+    padding: 7px 37px 7px 12px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, .65);
+    height: 50px;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    .text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      -ms-flex-item-align: center;
+      align-self: center;
+      word-break: break-all;
+      white-space: pre-line;
+    }
+
+    .node-words {
+
     }
   }
 }

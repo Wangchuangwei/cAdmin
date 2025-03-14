@@ -26,8 +26,8 @@ const emit = defineEmits(['updateChildNode'])
 
 const props = defineProps({
   childNode: {
-    type: Array,
-    default: () => []
+    type: Object,
+    default: () => {}
   },
   type: {
     type: String,
@@ -64,6 +64,7 @@ const addNodeType = (type) => {
           nodeName: "",
           priorityLevel: 1,
           conditionType: "0",
+          conditionList: [],
           childNode: {
             type: 1,
             nodeName: "",
@@ -78,6 +79,7 @@ const addNodeType = (type) => {
           nodeName: "",
           priorityLevel: 999,
           conditionType: "1",
+          conditionList: [],
           childNode: {
             type: 1,
             nodeName: "",

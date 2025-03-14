@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
+import  { MainIndex, Layout, Login }  from './initRouter'
 import menuRoute from './routes'
 
 let routerList = []
@@ -17,12 +18,12 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/system/login/Login.vue'),
+    component: Login,
   },
   {
     path: '/mainIndex',
     name: 'MainIndex',
-    component: () => import('@/layouts/Layout.vue'),
+    component: Layout,
     children: routerList
   },
 ]

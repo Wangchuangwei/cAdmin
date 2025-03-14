@@ -7,11 +7,14 @@ import App from './App.vue'
 
 import installComponent from './components/index'
 
+import clickoutside from '@/scripts/directives/clickoutside'
+
 import installStore from './store'
 import installRouter from './router'
 
-
 const app = createApp(App)
+
+app.directive('clickoutside', clickoutside)
 
 installComponent(app)
 installStore(app)

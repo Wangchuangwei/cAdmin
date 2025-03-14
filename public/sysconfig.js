@@ -6,6 +6,7 @@
 ;(function(global) {
   global.LOCAL_CONFIG = {
     TABS_VIEW_LIMIT: 10, // tab页最大打开数量TABS_VIEW_LIMIT-1
+    isRefresh: false, // 缓存页面时是否需要在关闭选项卡处刷新页面
     SYS_NAME: '个人开发平台',
     THEME: 'lightblue', //lightblue
     isToken: true, // 为false时证明不需要登录

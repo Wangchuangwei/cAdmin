@@ -3,9 +3,19 @@
     <div class="tags-inner-scroll-left" @click="handleLeft">
       <i class="iconfont icon-fanhui" style="color: #999; font-size: 17px;"></i>
     </div>
-    <div ref="scrollBody" class="tags-inner-scroll-body" >
-      <!-- <router-link>
+    <div ref="scrollBody" class="tags-inner-scroll-body">
+      <span v-for="(tag, index) in visitedViews" :key="tag.path">
+        <h-tag 
+          closable 
+          :name="tag.name" 
+          :color="isActive(tag.path)? 'active' : 'default'"  
+          @onClose='closeViewTabs($event, tag, index)'
+          @click.right.stop.prevent="closeChoice($event, tag, index)"
+        >{{tag.name }}</h-tag>
+      </span>
 
+      <!-- <router-link v-for="(item, index) in visitedViews" :key="item.path">
+        {{item.name }}
       </router-link> -->
     </div>
     <div class="tags-inner-scroll-right" @click="handleRight">
@@ -28,29 +38,119 @@
 <script setup>
 import {ref, reactive, watch, computed, nextTick} from 'vue'
 import {useRoute} from 'vue-router'
+import { router } from '@/router';
 
 import {useAppStore} from '@/store/modules/app'
+import storage from '@/utils/storageUtil'
+
+import HTag from '@/components/HTag/HTag.vue'
 
 const route = useRoute()
 const appStore = useAppStore()
 
-const styles = reactive({})
+const limit = window.LOCAL_CONFIG.TABS_VIEW_LIMIT
+
+let styles = ref({})
+let curTag = reactive({})
+
+const visitedViews = computed(() => {
+  if (appStore.visitedViews.length > limit) {
+
+    // 若页面有缓存，清除当前页面缓存
+    if (window.LOCAL_CONFIG.isRefresh) {
+      console.log("清除当前页面缓存")
+    }
+  }
+  let arr = appStore.visitedViews
+  // 确保第一个tab是首页
+  // if (arr[0] && arr[0].path !== '/mainIndex') {
+  //   arr.unshift(appStore.visitedViews[0])
+  // }
+  storage.setItem({name: 'visitedViews', value: arr})
+
+  return arr
+})
+
+const handleHide = () => {
+  styles.value = {}
+}
 
 const handleCloseCurrent = () => {
-
+  closeViewTabs(curTag.$event, curTag.view, curTag.index)
+  styles.value = {}
+  curTag = {}
 }
 
 const handleCloseAll = () => {
-
+  appStore.DelAllVisitedViews()
+  // 若页面有缓存，清除当前页面缓存
+  if (window.LOCAL_CONFIG.isRefresh) {
+    console.log("清除当前页面缓存")
+  }
+  nextTick(() => {
+    router.push({path: visitedViews.value[0].path})
+  })
+  styles.value = {}
+  curTag = {}
 }
 
 const handleCloseOther = () => {
+  appStore.DelOtherVisitedViews(curTag.view)
+  styles.value = {}
+  curTag = {}
+}
 
+const closeViewTabs = ($event, view, index) => {
+  appStore.DelCurVisitedViews(view)
+  // 若页面有缓存，清除当前页面缓存
+  if (window.LOCAL_CONFIG.isRefresh) {
+    console.log("清除当前页面缓存")
+  }
+
+  // $event.preventDefault()
+  if (isActive(view.path)) {
+    nextTick(() => {
+      visitedViews.value.length < index + 1 ? router.push({path: visitedViews.value[index - 1].path}) : router.push({path: visitedViews.value[index].path})
+    })
+  }
+}
+
+const closeChoice = ($event, view, index) => {
+  // 确保最后一个的宽度足够展示
+  if (window.innerWidth - $event.clientX > 148) {
+    styles.value = {
+      display: 'block',
+      top: `${$event.clientY}px`,
+      left: `${$event.clientX}px`,
+      height: '100px'
+    }
+    curTag = {
+      event: $event,
+      view: view, 
+      index: index
+    }
+  } else {
+    styles.value = {
+      display: 'block',
+      top: `${$event.clientY}px`,
+      left: `${$event.clientX - 148}px`,
+      height: '100px'
+    }
+    curTag = {
+      event: $event,
+      view: view, 
+      index: index
+    }
+  }
+}
+
+const isActive = (path) => {
+  // console.log("route:", route)
+  return path === route.path
 }
 
 // 添加tab
 const addViews = () => {
-  console.log("route12:", route)
   appStore.AddVisitedViews(route)
 }
 
@@ -96,6 +196,15 @@ watch(route, (to) => {
     right: 0;
     // float: right;
     cursor: pointer;
+  }
+
+  .tags-inner-scroll-body {
+    position: absolute;
+    padding: 0px 22px;
+    overflow: visible;
+    white-space: nowrap;
+    -webkit-transition: left .3s ease;
+    transition: left .3s ease;
   }
 
   .h-tag-close-tip {
