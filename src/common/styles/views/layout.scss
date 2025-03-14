@@ -1,0 +1,81 @@
+/** ---------------Layout.vue -------------------- */
+
+.app-wrapper {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  .h-topbar-wrapper {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    z-index: 990;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    /* background: #50a8d0; */
+    background: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .main-wrapper {
+    margin: 92px 0 0 200px;
+    background: #E6EBF5;
+
+    .h-sidebar-wrapper {
+      position: fixed;
+      left: 0;
+      top: 50px;
+      bottom: 0;
+    }  
+    
+    .main-container {
+      
+    }
+  }
+}
+
+.app-main{
+  min-width: 1075px;
+  margin-left: 9px;
+  margin-right: 8px;
+  border-radius: 5px;
+  height: calc(100% - 8px);
+  text-align: left;
+  position: relative;
+}
+
+/** ---------------Sidebar.vue -------------------- */
+.h-sidebar-contain {
+  background: #fff;
+  color: #192229;
+  width: 200px;
+  font-size: 14px;
+  top: 50px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/** ---------------Navbar.vue -------------------- */
+.h-navbar-wrapper {
+  height: 42px;
+  position: fixed;
+  top: 50px;
+  left: 200px;
+  bottom: 0;
+  right: 0;
+  text-align: left;
+  z-index: 989;
+  font-size: 13px;
+  background: #E6EBF5;
+  padding: 8px 8px 0 8px;
+  color: #171B26;
+  -webkit-transition: left .2sease-in-out;
+  transition: left .2sease-in-out;
+}

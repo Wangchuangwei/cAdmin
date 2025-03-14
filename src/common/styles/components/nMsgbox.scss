@@ -1,0 +1,121 @@
+.h-modal-mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(55, 55, 55, 0.6);
+  height: 100%;
+}
+
+.h-modal-wrap {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  outline: 0;
+
+  .h-modal-content {
+    position: relative;
+    background-color: #fff;
+    border: 0;
+    border-radius: 6px;
+    background-clip: padding-box;
+
+    .h-modal-close {
+      cursor: pointer;
+      font-size: 12px;
+      overflow: hidden;
+      position: absolute;
+      right: 16px;
+      top: 12px;
+    }
+
+    .h-modal-header {
+      border-bottom: 1px solid #f7f7f7;
+      cursor: pointer;
+      line-height: 1;
+      padding: 14px 40px 14px 16px;
+
+      .h-modal-header-inner {
+        display: inline-block;
+        width: 100%;
+        height: 14px;
+        line-height: 14px;
+        font-size: 14px;
+        color: #495060;
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .h-modal-body {
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 15px 15px 0px 15px;
+      word-break: break-all;
+
+      //自定义按钮
+      .pageFooter .pageFooter-buttongroup {
+        position: absolute;
+        bottom: 9px;
+        right: 18px;
+        margin: 0 auto;
+      }
+    }
+
+    .h-modal-footer {
+      border-top: 1px solid #f7f7f7;
+      padding: 12px 18px;
+      text-align: right;
+    }
+  }
+}
+
+.content {
+  padding: 34px 32px 24px;
+
+  .content-title {
+    padding: 0px 0 10px;
+
+    .modal-img {
+      vertical-align: middle;
+      width: 22px;
+      height: 22px;
+    }
+
+    span {
+      font-size: 16px;
+      line-height: 22px;
+      margin-left: 10px;
+      vertical-align: middle;
+      color: rgba(0, 0, 0, .85);
+    }
+  }
+
+  .content-body {
+    padding-left: 36px;
+    white-space: pre-line;
+
+    p {
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, .65);
+      word-wrap: break-word;
+    }
+  }
+
+  .content-body-all-text {
+    p {
+      vertical-align: middle;
+      font-size: 14px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, .65);
+    }
+  }
+}
