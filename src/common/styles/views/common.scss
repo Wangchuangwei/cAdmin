@@ -1,6 +1,17 @@
 ol, ul {
   list-style: none;
 }
+.clearfix {
+  clear: both;
+}
+.layout {
+  position: relative;
+  overflow: hidden;
+}
+.panel {
+  background-color: #FFFFFF;
+  padding-top: 17px;
+}
 
 .w-full {
   width: 100%;

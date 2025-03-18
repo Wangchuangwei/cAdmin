@@ -9,6 +9,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 引入mock插件
 import {viteMockServe} from 'vite-plugin-mock'
 
+import vueJsx from "@vitejs/plugin-vue-jsx";  // 配置vue使用jsx
+
 // https://vite.dev/config/
 export default defineConfig(({command, mode, ssrBuild}) => {
   const env = loadEnv(mode, process.cwd())
@@ -35,6 +37,7 @@ export default defineConfig(({command, mode, ssrBuild}) => {
         localEnabled: command === 'serve',
         mockPath: 'mock', 
       }),
+      vueJsx()
     ],
     server: {
       proxy: {

@@ -40,6 +40,7 @@ const classes = computed(() => {
 const textClasses = computed(() => `${prefixCls}-text`)
 
 const close = (event) => {
+  console.log("123123:")
   props.name ? emit('on-close',event, props.name) : emit('on-close',event)
 }
 </script>

@@ -4,7 +4,7 @@
       <i class="iconfont icon-fanhui" style="color: #999; font-size: 17px;"></i>
     </div>
     <div ref="scrollBody" class="tags-inner-scroll-body">
-      <span v-for="(tag, index) in visitedViews" :key="tag.path">
+      <router-link v-for="(tag, index) in visitedViews" :key="tag.path" :to="{path: tag.path, query: tag.query}">
         <h-tag 
           closable 
           :name="tag.name" 
@@ -12,11 +12,7 @@
           @onClose='closeViewTabs($event, tag, index)'
           @click.right.stop.prevent="closeChoice($event, tag, index)"
         >{{tag.name }}</h-tag>
-      </span>
-
-      <!-- <router-link v-for="(item, index) in visitedViews" :key="item.path">
-        {{item.name }}
-      </router-link> -->
+      </router-link>
     </div>
     <div class="tags-inner-scroll-right" @click="handleRight">
       <i class="iconfont icon-gengduo" style="color: #999; font-size: 17px;"></i>
@@ -63,9 +59,9 @@ const visitedViews = computed(() => {
   }
   let arr = appStore.visitedViews
   // 确保第一个tab是首页
-  // if (arr[0] && arr[0].path !== '/mainIndex') {
-  //   arr.unshift(appStore.visitedViews[0])
-  // }
+  if (arr[0] && arr[0].path !== '/mainIndex') {
+    arr.unshift(appStore.visitedViews[0])
+  }
   storage.setItem({name: 'visitedViews', value: arr})
 
   return arr
@@ -107,7 +103,7 @@ const closeViewTabs = ($event, view, index) => {
     console.log("清除当前页面缓存")
   }
 
-  // $event.preventDefault()
+  $event.preventDefault()
   if (isActive(view.path)) {
     nextTick(() => {
       visitedViews.value.length < index + 1 ? router.push({path: visitedViews.value[index - 1].path}) : router.push({path: visitedViews.value[index].path})
@@ -155,6 +151,7 @@ const addViews = () => {
 }
 
 watch(route, (to) => {
+  console.log("to111:", to)
   addViews()
   nextTick(() => {
     // getActiveMenuByRouter(to.path, childRoute)

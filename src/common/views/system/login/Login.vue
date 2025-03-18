@@ -15,7 +15,7 @@ import LoginForm from './LoginForm.vue'
 .login-container {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #28404E 0%, #1c2e38 100%); 
+  // background: linear-gradient(to bottom, #28404E 0%, #1c2e38 100%); 
 }
 .login-form {
   position: absolute;

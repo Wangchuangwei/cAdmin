@@ -76,7 +76,6 @@ const handleDel = () => {
   console.log('handleDel')
 }
 
-// console.log("$tMsgbox.info():", tt.confirm(obj))
 
 const loading = ref(false)
 
@@ -104,7 +103,7 @@ const handleLogin = async () => {
       type: 'passwd',
     })    
     router.push({
-      name: 'MainIndex'
+      path: '/mainIndex'
     })
   } catch (error) {
     
