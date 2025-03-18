@@ -45,9 +45,9 @@
 
 <script setup>
 import {ref} from "vue"
-import { getAssetURL } from '@/utils/common'
-import countTo from '@/components/CountTo/CountTo.vue'
-import chart from '@/components/ECharts/Chart.vue'
+import { getAssetURL } from '@/common/scripts/utils/common'
+import countTo from '@/common/components/CountTo/CountTo.vue'
+import chart from '@/common/components/ECharts/Chart.vue'
 
 let tabs = ref(true)
 

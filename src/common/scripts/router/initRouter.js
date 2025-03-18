@@ -10,3 +10,6 @@ export function MainIndex() {
   return import(/* webpackChunkName: "mainIndex" */ '@/common/views/system/main/MainIndex.vue')
 }
 
+export function _404() {
+  return import(/* webpackChunkName: "_404" */ '@/common/views/system/main/_404.vue')
+}

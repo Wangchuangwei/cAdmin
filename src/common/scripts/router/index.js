@@ -1,20 +1,9 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import installRouterGuard from './guard';
 
-import  { MainIndex, Layout, Login }  from './initRouter'
-// import menuRoute from './routes'
+import  { MainIndex, Layout, Login, _404 }  from './initRouter'
 
-// let routerList = []
-// for (let menu in menuRoute) {
-//   let idx = menu.lastIndexOf('/')
-//   routerList.push({
-//     name: menu.slice(idx + 1),
-//     path: menu,
-//     component: menuRoute[menu],
-//   })
-// }
-
-const routes = [
+export const constantRouterMap = [
   {
     path: '/login',
     name: 'Login',
@@ -28,12 +17,17 @@ const routes = [
     children:[
       {
         path: '/mainIndex',
-        name: 'MainIndex',
+        name: '首页',
         component: MainIndex,
       }
     ]
-    // children: routerList
   },
+  // {
+  //   path: '/:pathMatch(.*)',
+  //   name: '*',
+  //   meta: { hidden: true },
+  //   redirect: '/404',
+  // },
 ]
 
 // 路由实例
@@ -43,7 +37,7 @@ export const router = createRouter({
   // 创建hash历史记录
   history: createWebHashHistory(),
   // 初始路由列表
-  routes: routes,
+  routes: constantRouterMap,
   // 是否应该禁止尾部斜杠。默认为假
   strict: true,
 });

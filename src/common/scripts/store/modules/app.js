@@ -1,11 +1,6 @@
 import { defineStore } from 'pinia';
 import storage from '@/common/scripts/utils/storageUtil'
 
-//根据后台传回的可用menus,递归过滤异步路由表，返回符合用户角色权限的路由表
-function filterRouterByMenus (router, menus) {
-
-}
-
 export const useAppStore = defineStore('useAppStore', {
   state: () => {
     return {
@@ -24,14 +19,10 @@ export const useAppStore = defineStore('useAppStore', {
       pColor: '#165dff',
       menusRoot: [], // 有多个子系统
       menusNoRoot: [], // 仅有一个系统[没有头部菜单],
-      visitedViews: [], // 记录访问过的路由
+      visitedViews: storage.getItem('visitedViews') || [{name: '首页', path: '/mainIndex'}], // 记录访问过的路由
     }
   },
   actions: {
-    // 根据服务端菜单生成路由
-    GenerateRoutesByMenus(data) {
-
-    },
     GenerateMenuByMenus(data) {
       if (data && data.length >= 0) {
         if (data.length > 0) {
