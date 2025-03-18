@@ -17,8 +17,8 @@
 
 <script setup>
 import {ref} from "vue" 
-import { getAssetURL } from '@/utils/common'
-import nodeWrap from "@/components/TodoWork/NodeWrap.vue";
+import { getAssetURL } from '@/common/scripts/utils/common'
+import nodeWrap from "@/common/components/TodoWork/NodeWrap.vue";
 
 const nodeConfig = {
   type: 0,
@@ -60,7 +60,7 @@ const zoomSize = (type) => {
   .end-node-circle {
     width: 56px;
     height: 30px;
-    background: url(@/assets/svg/checkmark.svg) no-repeat top;
+    background: url(@/common/assets/svg/checkmark.svg) no-repeat top;
     margin: auto;
   }
   .end-node-text {
