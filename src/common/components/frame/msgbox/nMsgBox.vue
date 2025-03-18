@@ -80,6 +80,14 @@ const props = defineProps({
     type: String,
     default: '内容'
   },
+  printPath: {
+    type: String,
+    default: ""
+  },
+  printData: {
+    type: Object,
+    default: () => {}
+  },
   width: {
     type: Number,
     default: 400
@@ -95,24 +103,23 @@ const props = defineProps({
   onCancel: {
     type: Function,
     default: () => {}
-  }
+  },
+  onClose: {
+    type: Function,
+    default: () => {}
+  },
 })
 
-const close = () => {
-  emit('on-close')
-}
 const cancel = () => {
   isShow.value = false;
   props.onCancel();
-  close();
+  props.onClose();
 }
 const ensure = () => {
   isShow.value = false;
   props.onEnsure();
-  close();
+  props.onClose();
 }
-
-defineEmits(['on-close'])
 
 onMounted(() => {
 })

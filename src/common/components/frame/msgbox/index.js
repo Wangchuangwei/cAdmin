@@ -1,5 +1,5 @@
 
-import { createApp, h, defineComponent, ref, nextTick } from 'vue';
+import { createApp, createVNode, render, h, defineComponent, ref, nextTick } from 'vue';
 import nMsgbox from './nMsgbox.vue'; // 导入 nMsgbox 组件
 
 function open(paraObj, type) {
@@ -7,7 +7,10 @@ function open(paraObj, type) {
     const defaultOptions = {}; // 默认options，预留用于扩展业务
     const options = Object.assign({}, defaultOptions, paraObj.options || {});
 
-    const boxInstance = createApp(nMsgbox, {
+    const boxElement = document.createElement("div");
+    document.body.appendChild(boxElement);
+
+    const boxInstance = createVNode(nMsgbox, {
       modalType: type,
       contentTitle: paraObj.contentTitle,
       contentBody: paraObj.contentBody,
@@ -16,14 +19,13 @@ function open(paraObj, type) {
       options: options,
       onEnsure: paraObj.onEnsure ? paraObj.onEnsure : () => { },
       onCancel: paraObj.onCancel ? paraObj.onCancel : () => { },
+      onClose: () => {
+        render(null, boxElement); // 销毁组件
+        document.body.removeChild(boxElement); // 移除 DOM 元素
+      }
     });
-    const boxElement = document.createElement("div");
-    document.body.appendChild(boxElement);
-    const container = boxInstance.mount(boxElement);
-    console.log("container:", container, boxInstance)
 
-    // 监听子组件的 close 事件
-
+    render(boxInstance, boxElement)
   };
 
   install();
