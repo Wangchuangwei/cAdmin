@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4843927 */
-  src: url('iconfont.woff2?t=1741270734791') format('woff2'),
-       url('iconfont.woff?t=1741270734791') format('woff'),
-       url('iconfont.ttf?t=1741270734791') format('truetype');
+  src: url('iconfont.woff2?t=1742299305261') format('woff2'),
+       url('iconfont.woff?t=1742299305261') format('woff'),
+       url('iconfont.ttf?t=1742299305261') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lvzhou_gailan:before {
+  content: "\e63b";
+}
+
+.icon-gongzuotai:before {
+  content: "\e611";
+}
+
+.icon-gailan:before {
+  content: "\e69d";
+}
+
+.icon-MSGBOX:before {
+  content: "\e632";
+}
+
+.icon-COMPONENTS:before {
+  content: "\e9fa";
+}
+
+.icon-gailan1:before {
+  content: "\e788";
+}
+
+.icon-dashboard:before {
+  content: "\e631";
+}
+
+.icon-analysis_c:before {
+  content: "\e6fa";
 }
 
 .icon-shirt:before {
