@@ -7,6 +7,8 @@ const instance = getCurrentInstance();
 
 const $tMsgbox = instance.appContext.app.config.globalProperties.$tMsgbox;
 provide('$tMsgbox', $tMsgbox)
+const $modal = instance.appContext.app.config.globalProperties.$modal;
+provide('$modal', $modal)
 
 </script>
 

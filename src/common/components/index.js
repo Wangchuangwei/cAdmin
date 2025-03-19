@@ -1,4 +1,5 @@
 import tMsgbox from "./frame/msgbox/index.js";
+import nModal from './frame/modal/index.js'
 
 const components = {
 
@@ -9,6 +10,7 @@ const install = (app, opts = {}) => {
     app.component(key, components[key])
   })
   app.config.globalProperties.$tMsgbox = tMsgbox
+  app.config.globalProperties.$modal = nModal
 }
 
 export default function installComponent(app) {
