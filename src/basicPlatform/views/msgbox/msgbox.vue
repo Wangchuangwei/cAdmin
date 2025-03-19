@@ -5,7 +5,10 @@
       <h-tag @click="msgboxBox('failed')" class="tagCard">失败提示框</h-tag>
       <h-tag @click="msgboxBox('confirm')" class="tagCard">确认提示框</h-tag>
       <h-tag @click="msgboxBox('info')" class="tagCard">消息提示框</h-tag>
-      <h-tag @click="msgboxBox('no')" class="tagCard">纯文字提示框</h-tag>      
+      <h-tag @click="msgboxBox('no')" class="tagCard">纯文字提示框</h-tag>   
+      <p>
+        <el-button @click="handleClick">dian</el-button>
+      </p>
     </div>
   </div>
 </template>
@@ -15,6 +18,7 @@ import {inject, onMounted } from 'vue';
 import HTag from '@/common/components/HTag/HTag.vue';
 
 const $tMsgbox = inject('$tMsgbox')
+const $modal = inject('$modal')
 
 const handleDel = () => {
   console.log('handleDel')
@@ -28,6 +32,17 @@ const msgboxBox = (type) => {
       handleDel()
     }
   })
+}
+
+const handleClick = () => {
+  $modal.open(
+    'basicBusiness/views/asyncModal/todo_info',
+    '标题12',
+    'add',
+    {a: 123, b: 456},
+    300,
+    350,
+  )
 }
 
 onMounted(() => {

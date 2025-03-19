@@ -27,7 +27,7 @@
         >
           <a v-if="closable" :class="[prefixCls + '-close']" @click="close">
             <slot name="close">
-              <el-icon size="14" color="#f7f7f7"><Close /></el-icon>
+              <i class="iconfont icon-close" ></i>
             </slot>
           </a>
           <div
@@ -178,6 +178,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['input', 'on-cancel', 'on-ok', 'on-close', 'on-scroll'])
+
 const prefixCls = 'h-modal'
 const wrapShow = ref(false)
 const visible = ref(props.value)
@@ -321,7 +323,7 @@ const ok = () => {
       // 不传beforeOkClose 默认关闭
       visible.value = false;
       buttonLoading.value = false;
-      this.$emit('input', false);
+      emit('input', false);
     } else {
       buttonLoading.value = true;
     }    
@@ -339,7 +341,7 @@ const EscClose = (e) => {
       // esc 关闭前判断 beforeEscClose 函数返回
       const flag = this.beforeEscClose && this.beforeEscClose();
       if (!flag) return;
-      this.$emit('on-cancel');
+      emit('on-cancel');
       cancel();
     }
   }
@@ -364,7 +366,6 @@ onMounted(() => {
   if ($slots.header === undefined && !props.title) {
     showHead.value = false;
   }
-
 
   on(document, 'keydown', EscClose);
 })
