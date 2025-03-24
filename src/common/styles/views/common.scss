@@ -11,8 +11,14 @@ ol, ul {
 .panel {
   background-color: #FFFFFF;
   padding-top: 17px;
+  height: calc(100vh - 92px)
 }
-
+.flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .w-full {
   width: 100%;
 }

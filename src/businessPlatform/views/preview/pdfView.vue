@@ -1,5 +1,5 @@
 <template>
-  <div class="cAdmin__container">
+  <div class="cAdmin__container panel">
     <div class="c-approval-zoom">
       <div :class="{disabled: nowVal == 50}" @click="zoomSize(1)">-</div>
       <span>{{nowVal}}%</span>

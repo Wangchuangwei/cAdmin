@@ -1,11 +1,9 @@
 <template>
-  <div>1123</div>
+  <div class="layout">
+    <div class="panel">1123</div>
+  </div>
 </template>
 
-<script>
+<script></script>
 
-</script>
-
-<style>
-
-</style>
+<style></style>

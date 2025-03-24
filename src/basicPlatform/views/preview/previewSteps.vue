@@ -11,11 +11,13 @@
 <template>
   <div class="layout">
     <div class="panel">
-      <h-tag v-for="(item, index) in previewFormat" 
-        :key="index" 
-        @click="handlePreview(item.type, item.name, item.vuePath, item.filePath)" 
-        class="tagCard"
-      >{{item.name }}</h-tag>
+      <card title="文件预览" desc="文件格式：pdf、doc、excel" style="width: 50%">
+        <h-tag v-for="(item, index) in previewFormat" 
+          :key="index" 
+          @click="handlePreview(item.type, item.name, item.vuePath, item.filePath)" 
+          class="tagCard"
+        >{{item.name }}</h-tag>
+      </card>
     </div>
   </div>
 </template>
@@ -23,6 +25,7 @@
 <script setup>
 import { inject } from 'vue';
 import HTag from '@/common/components/HTag/HTag.vue';
+import Card from '@/common/components/Card/Card.vue'
 
 const $modal = inject('$modal')
 
