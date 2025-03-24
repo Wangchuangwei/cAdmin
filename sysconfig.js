@@ -13,6 +13,7 @@
     isToken: true, // 为false时证明不需要登录
     STORAGE_TIME: 1, // storage 存储时间，单位：分钟
     isMergeMenu: false, //是否合并菜单
+    proxyExtend: '/apache', //代理前缀扩展
     fileSize: 10240, //上传文件大小限制，单位 kb
   }
 })(window);

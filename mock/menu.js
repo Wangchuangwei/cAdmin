@@ -89,6 +89,16 @@ const menuList = [
     menuCode: "msgbox",
     menuLevel: "3",
   },
+  {
+    subsystemCode: "basicPlatform",
+    menuName: "文件预览",
+    menuIcon: 'view',
+    menuHerf: "/basicPlatform/components/preview",
+    menuId: "preview",
+    uppMenuCode: "components",
+    menuCode: "preview",
+    menuLevel: "3",
+  },
   // 业务系统
   {
     subsystemCode: "businessPlatform",

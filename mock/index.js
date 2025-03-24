@@ -1,6 +1,7 @@
 import {createUserList} from './user'
 import menuList from './menu'
 
+const FILE_DIR = '/frame-layout/mock/files/'
 
 function randomWord(range) {
   const arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
@@ -39,4 +40,15 @@ export default [
       return { respType: "S" }
     },
   },
+  // 获取文件
+  {
+    url: '/tbsp/downFile',
+    method: 'get',
+    response: (req) => {
+      console.log("req:", req)
+      const {fileName} = req.query
+      let baseUrl = 'http://' + req.headers.host + FILE_DIR
+      return { respType: "S", data: {fileName: fileName, url: baseUrl + fileName} }
+    }
+  }
 ]
