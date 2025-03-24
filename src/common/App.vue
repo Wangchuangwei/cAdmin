@@ -10,6 +10,10 @@ provide('$tMsgbox', $tMsgbox)
 const $modal = instance.appContext.app.config.globalProperties.$modal;
 provide('$modal', $modal)
 
+// import { useI18n } from 'vue-i18n';
+// const { locale } = useI18n();
+// locale.value = 'en-US'
+
 </script>
 
 <template>

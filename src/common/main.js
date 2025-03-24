@@ -13,6 +13,7 @@ import clickoutside from './scripts/directives/clickoutside'
 
 import installStore from './scripts/store'
 import installRouter from './scripts/router'
+import installI18n from './scripts/locales'
 
 const app = createApp(App)
 
@@ -23,5 +24,6 @@ app.directive('clickoutside', clickoutside)
 installComponent(app)
 installStore(app)
 installRouter(app)
+installI18n(app)
 
 app.mount('#app')
