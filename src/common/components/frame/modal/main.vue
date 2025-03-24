@@ -19,8 +19,19 @@
         </p>
       </template>
       <div class="modal-body">
-        <slot></slot>
+        <slot 
+          :title="title" 
+          :editType="editType" 
+          :modifyData="modifyData" 
+          :workFlag="workFlag"
+          :width="width" 
+          :height="height" 
+          @handleAction="close"
+        ></slot>
       </div>
+      <template v-slot:footer>
+        <div style="height: 25px;"></div>
+      </template>
     </MsgBox>
    </div>
  </template>
@@ -82,7 +93,7 @@ const close = () => {
 }
 
 onMounted(() => {
-  console.log("props:", props)
+  console.log("modal props:", props)
 })
 </script>
  

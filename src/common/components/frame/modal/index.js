@@ -34,7 +34,7 @@ async function open(name, title, editType, modifyData, width, height, workFlag, 
       {
         // 将插槽内容包装为函数形式
         // default: () => [h(testVue)]
-        default: () => [h(res.default)]
+        default: (props) => [h(res.default, {...props})]
       }
     );
     render(boxInstance, boxElement)
