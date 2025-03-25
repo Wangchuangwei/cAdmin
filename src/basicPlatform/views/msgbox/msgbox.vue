@@ -9,6 +9,12 @@
       <p>
         <el-button @click="handleClick">dian</el-button>
       </p>
+      <upload 
+        :format="['pdf', 'xlsx']" 
+        :max-size="1024"
+        :on-format-error="handleFormatError" 
+        :on-exceeded-size="fileOverSize"
+      ></upload>
     </div>
   </div>
 </template>
@@ -16,6 +22,22 @@
 <script setup>
 import {inject, onMounted } from 'vue';
 import HTag from '@/common/components/HTag/HTag.vue';
+
+import upload from './upload.vue'
+
+const handleFormatError = (file) => {
+  $tMsgbox.failed({
+    contentTitle: '提示',
+    contentBody: '文件格式不正确, 请选择pdf或者xlsx格式'
+  })
+}
+
+const fileOverSize = (file) => {
+  $tMsgbox.failed({
+    contentTitle: '提示',
+    contentBody: '文件大小不能超过1M'
+  })
+}
 
 const $tMsgbox = inject('$tMsgbox')
 const $modal = inject('$modal')

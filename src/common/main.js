@@ -10,10 +10,10 @@ import 'element-plus/dist/index.css'
 import installComponent from './components/index'
 
 import clickoutside from './scripts/directives/clickoutside'
-
 import installStore from './scripts/store'
 import installRouter from './scripts/router'
 import installI18n from './scripts/locales'
+import installHttp from './scripts/api/config/index'
 
 const app = createApp(App)
 
@@ -25,5 +25,6 @@ installComponent(app)
 installStore(app)
 installRouter(app)
 installI18n(app)
+installHttp(app)
 
 app.mount('#app')
