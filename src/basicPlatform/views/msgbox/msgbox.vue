@@ -1,6 +1,17 @@
 <template>
   <div class="layout">
     <div class="panel">
+      <div style="margin-bottom: 20px;">
+        <upload 
+          action="/api/project/uploadFile"
+          :format="['pdf', 'xlsx']" 
+          :max-size="1024"
+          :on-format-error="handleFormatError" 
+          :on-exceeded-size="fileOverSize"
+        >
+          <el-input readonly></el-input>
+        </upload>
+      </div>
       <h-tag @click="msgboxBox('success')" class="tagCard">成功提示框</h-tag>
       <h-tag @click="msgboxBox('failed')" class="tagCard">失败提示框</h-tag>
       <h-tag @click="msgboxBox('confirm')" class="tagCard">确认提示框</h-tag>
@@ -9,12 +20,6 @@
       <p>
         <el-button @click="handleClick">dian</el-button>
       </p>
-      <upload 
-        :format="['pdf', 'xlsx']" 
-        :max-size="1024"
-        :on-format-error="handleFormatError" 
-        :on-exceeded-size="fileOverSize"
-      ></upload>
     </div>
   </div>
 </template>

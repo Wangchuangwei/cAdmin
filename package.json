@@ -23,7 +23,8 @@
     "canvas-datagrid": "^0.4.7",
     "xlsx": "^0.18.5",
     "highlight.js": "^11.10.0",
-    "jsbarcode": "^3.11.6"
+    "jsbarcode": "^3.11.6",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",

@@ -40,12 +40,20 @@ export default [
       return { respType: "S" }
     },
   },
+  // 上传文件
+  {
+    url: '/tbsp/uploadFiles',//请求地址
+    method: 'post',//请求方式
+    response: (res) => {
+      console.log("res:", res)
+      return { respType: "S" }
+    },
+  },
   // 获取文件
   {
     url: '/tbsp/downFile',
     method: 'get',
     response: (req) => {
-      console.log("req:", req)
       const {fileName} = req.query
       let baseUrl = 'http://' + req.headers.host + FILE_DIR
       return { respType: "S", data: {fileName: fileName, url: baseUrl + fileName} }
